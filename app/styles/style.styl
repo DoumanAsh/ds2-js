@@ -1,0 +1,98 @@
+*
+    margin: 0
+    padding: 0
+
+img_url(name)
+    url(images/name)
+
+animation(args...)
+   animation args
+
+@keyframes fade-in
+    from
+        opacity: 0;
+        opacity: 1\9; /* IE9 only */
+    to
+        opacity:1;
+
+body
+    font: 16px Helvetica, Georgia, sans-serif
+    font-family: Georgia, Serif
+    line-height: 24px
+
+img.pic
+    border-radius: 6px
+
+h1.title
+    font-size: 3rem
+    padding-top: 1rem
+    padding-bottom: 1rem
+    border-bottom: 1px solid #999
+    display: inline-block
+    letter-spacing: -2px
+    margin-bottom: 16px
+
+h2.title
+    font-size: 1.5rem
+
+p
+    word-wrap: break-word
+
+div.ds2_main
+    display: flex
+    flex-flow: column
+    width: 50%
+    position: fixed
+    top: 5%
+    left: 25%
+    bottom: 5%
+    box-shadow: 2px 2px 2px 2px #aaa
+    background-color: #eaeaea
+
+    & > div.heading
+        padding: .5em
+        text-align: center
+        color: white
+        background-color: #696969
+
+    & > div.save_up
+        overflow: hidden;
+        margin: 10px;
+        & > button.save
+            float: right
+        & > button.upload
+        & > button.save
+            border-radius: 4px
+            color: #ffffff
+            border: none
+            font-size: 20px
+            background: #757575
+            padding: 10px 20px 10px 20px
+            text-decoration: none
+            &:hover
+            &:active
+                background: #080808
+                text-decoration: none
+        & > button.upload
+            & input[type="file"]
+                display: none
+
+
+    & > form.text_box
+        vertical-align: middle
+        text-align: center
+        display: table
+        padding: 1rem
+        & > label
+            display: block
+            color: #5a5454
+            padding: 10px
+            font-size: 1.2rem
+        & > input
+            border: 0
+            padding: 10px
+            border: 1px solid #DDDDDD
+            &:focus
+                outline: none
+                box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+

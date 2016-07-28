@@ -1,0 +1,26 @@
+include _head.jade
+
+script(src="/js/app.js")
+
+script.
+    var common = require("js/common.js");
+    var ds2 = require("js/ds_two.js");
+
+div.ds2_main
+    div(class="heading")
+        h1="Devil Survivor 2 Record Break Save Editor"
+
+    div(class="save_up")
+        button(class="upload", onclick="save_input.click()")="Upload save file"
+            input(id="ds2_save", class="upload", type='file', name="files[]")
+        button(class="save", onclick="ds2.saveNew()")="Save to disk"
+        script.
+            var save_input = document.getElementById('ds2_save')
+            save_input.addEventListener('change', ds2.saveLoad, false);
+            //Add drag-and-drop
+            document.addEventListener('dragover', common.handleDragOver, false);
+            document.addEventListener('drop', ds2.saveLoad, false);
+
+    form(id="macca", class="text_box", action="", onsubmit="return false")
+        label(for="macca_input")="Macca"
+        input(id="macca_input")
