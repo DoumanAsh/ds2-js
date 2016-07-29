@@ -18,7 +18,11 @@ function Save(name, buffer) {
     this.view = new DataView(this.buffer);
 
     this.ui = {
-        'macca': document.getElementById('macca_input')
+        'macca': {
+            dom: document.getElementById('macca_input'),
+            offset: 0x6C4,
+            len: 4
+        }
     };
 
     this.to_disk = function() {
@@ -32,7 +36,58 @@ function Save(name, buffer) {
      * Initializes UI with save's values.
      */
     this.init_ui = function() {
-        this.ui.macca.value = this.get_int(0x6C4, 4);
+        for (var key in this.ui) {
+            if (this.ui.hasOwnProperty(key)) {
+                this.ui[key].dom.value = this.get_int(this.ui[key].offset, this.ui[key].len);
+            }
+            else {
+                console.log("Error: unknown ui key=" + key);
+            }
+        }
+    };
+
+    /**
+     * Sets value of UI's element.
+     *
+     * @param name Name of existing element. Throws on invalid name.
+     * @param value New value of element.
+     */
+    this.set_ui_val = function(name, value) {
+        if (!(name in this.ui)) {
+            throw "Invalid UI element '" + name + "' is attempted to be set";
+        }
+
+        this.set_int(this.ui[name].offset, value, this.ui[name].len);
+    };
+
+    /**
+     * Writes value into save's view.
+     *
+     * @param offset From where to start reading.
+     * @param num Number of bytes to extract.
+     */
+
+    this.set_int = function(offset, value, num) {
+        if (offset > this.buffer.byteLength) {
+            throw "offset=" + offset + " is greater than save length=" + this.buffer.byteLength;
+        }
+        if ((offset + num) > this.buffer.byteLength) {
+            throw "Cannot read " + num + "from save offset=" + offset + ". Length is only " + this.buffer.byteLength;
+        }
+
+        switch (num) {
+            case 4:
+                this.view.setUint32(offset, value, true);
+                break;
+            case 2:
+                this.view.setUint16(offset, value, true);
+                break;
+            case 1:
+                this.view.setUint8(offset, value, true);
+                break;
+            default:
+                throw "Unsupported size=" + num + " to read from save is given.";
+        }
     };
 
     /**
@@ -112,9 +167,47 @@ function ds2SaveNew() {
     if (save) {
         save.to_disk();
     }
+    else {
+        alert("No save is uploaded");
+    }
+}
+
+function input4bytes(ev) {
+    if (!save) {
+        return;
+    }
+
+    var invalid = function(target) {
+        if (!target.className.includes("invalid")) {
+            target.className += "invalid";
+            target.title = "Allowed values: [0; " + 0xFFFFFFFF + "]";
+        }
+    };
+
+    var valid = function(target) {
+        target.className = target.className.replace("invalid", "");
+        target.title = "";
+    };
+
+    if (!ev.target.value || isNaN(ev.target.value)) {
+        invalid(ev.target);
+        return;
+    }
+
+    var value = parseInt(ev.target.value);
+    if (value < 0 || value > 0xFFFFFFFF) {
+        invalid(ev.target);
+        return;
+    }
+
+    valid(ev.target);
+    var name = ev.target.id.replace("_input", "");
+
+    save.set_ui_val(name, value);
 }
 
 if (typeof module !== "undefined" && module.exports) {
     module.exports.saveLoad = ds2SaveLoad;
     module.exports.saveNew = ds2SaveNew;
+    module.exports.input4bytes = input4bytes;
 }

@@ -24,3 +24,7 @@ div.ds2_main
     form(id="macca", class="text_box", action="", onsubmit="return false")
         label(for="macca_input")="Macca"
         input(id="macca_input")
+        script.
+            var macca_input = document.getElementById('macca_input')
+            macca_input.oninput = ds2.input4bytes;
+            macca_input.onpropertychange = macca_input.oninput; // for IE8
