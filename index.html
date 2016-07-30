@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>Devil Survivor 2 Record Breaker Save Editor</title><link href="/style.css" rel="stylesheet"></head></html><script src="/js/app.js"></script><script>var common = require("js/common.js");
+<!DOCTYPE html><html lang="en"><head><title>Devil Survivor 2 Record Breaker Save Editor</title><link href="style.css" rel="stylesheet"></head></html><script src="js/app.js"></script><script>var common = require("js/common.js");
 var ds2 = require("js/ds_two.js");
 </script><div class="ds2_main"><div class="heading"><h1>Devil Survivor 2 Record Break Save Editor</h1></div><div class="save_up"><button onclick="save_input.click()" class="upload">Upload save<input id="ds2_save" type="file" name="files[]" class="upload"></button><span id="warning" class="warning">WARNING: Be sure to backup your save file!</span><button onclick="ds2.saveNew()" class="save">Save to disk</button><script>var save_input = document.getElementById('ds2_save')
 save_input.addEventListener('change', ds2.saveLoad, false);
