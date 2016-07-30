@@ -25,11 +25,16 @@ function Save(name, buffer) {
         }
     };
 
+    /**
+     * Prompt user to download save.
+     *
+     * @note File will be saved as binary one.
+     */
     this.to_disk = function() {
-        var buff = new Uint8Array(this.buffer);
-        var blob = new Blob(buff, {type: "application/octet-stream;charset=ISO8859-1"});
-        // TODO: fix encoding of saved file.
-        saveAs(blob, this.name, true);
+        var file = new File([new Uint8Array(this.buffer)],
+                            this.name,
+                            {type: "data:application/octet-stream;base64,"});
+        saveAs(file);
     };
 
     /**
@@ -39,6 +44,7 @@ function Save(name, buffer) {
         for (var key in this.ui) {
             if (this.ui.hasOwnProperty(key)) {
                 this.ui[key].dom.value = this.get_int(this.ui[key].offset, this.ui[key].len);
+                this.ui[key].dom.disabled = false;
             }
             else {
                 console.log("Error: unknown ui key=" + key);
@@ -154,6 +160,7 @@ function ds2SaveLoad(event) {
         if (is_ds2_save(new Uint8Array(buffer, 0, 4))) {
             save = new Save(file.name, buffer);
             save.init_ui();
+            show_warning();
         }
         else {
             alert("Invalid Devil Survivor 2 RB save");
@@ -162,6 +169,18 @@ function ds2SaveLoad(event) {
 
     reader.readAsArrayBuffer(file);
 }
+
+/**
+ * Shows warning message stored by id 'warning'
+ *
+ * It just adds class show.
+ */
+var show_warning = function() {
+    document.getElementById('warning').className += " show";
+    show_warning = function () {
+        return;
+    };
+};
 
 function ds2SaveNew() {
     if (save) {
@@ -194,7 +213,9 @@ function input4bytes(ev) {
         return;
     }
 
+    console.log(ev.target.value);
     var value = parseInt(ev.target.value);
+    console.log(value);
     if (value < 0 || value > 0xFFFFFFFF) {
         invalid(ev.target);
         return;

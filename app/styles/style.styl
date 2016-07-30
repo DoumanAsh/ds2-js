@@ -56,10 +56,17 @@ div.ds2_main
         background-color: #696969
 
     & > div.save_up
-        overflow: hidden;
-        margin: 10px;
-        & > button.save
-            float: right
+        overflow: hidden
+        margin: 10px
+        display: flex
+        justify-content: space-around
+        & > span.warning
+            color: #ff2d00
+            font-size: 1.5em
+            visibility: hidden
+            &.show
+                visibility: inherit
+
         & > button.upload
         & > button.save
             border-radius: 4px
@@ -96,5 +103,5 @@ div.ds2_main
                 outline: none
                 box-shadow: 0 0 5px rgba(81, 203, 238, 1);
             &.invalid
-                background-color : #ff0d0d
+                background-color: #ff0d0d
 

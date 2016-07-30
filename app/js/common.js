@@ -34,8 +34,20 @@ function selectEventFiles(event) {
     }
 }
 
+/**
+ * Converts arrayBuffer to base64 string(binary).
+ *
+ * @param arrayBuffer Array buffer instance.
+ *
+ * @return base64 string.
+ */
+function base64ArrayBuffer(arrayBuffer) {
+    return btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+}
+
 if (typeof module !== "undefined" && module.exports) {
     module.exports.selectEventFiles = selectEventFiles;
     module.exports.handleDragOver = handleDragOver;
     module.exports.fileErrorHandler = fileErrorHandler;
+    module.exports.base64ArrayBuffer = base64ArrayBuffer;
 }
