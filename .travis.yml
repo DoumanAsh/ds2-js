@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - node
+
+before_script:
+  - npm install -g brunch
+  - npm install
+
+script:
+  - brunch build --production
+
+after_script: sh ./ci/update_page.sh
