@@ -213,9 +213,7 @@ function input4bytes(ev) {
         return;
     }
 
-    console.log(ev.target.value);
     var value = parseInt(ev.target.value);
-    console.log(value);
     if (value < 0 || value > 0xFFFFFFFF) {
         invalid(ev.target);
         return;
