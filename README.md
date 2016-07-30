@@ -4,5 +4,12 @@
 
 This is a online save editor for Devil Survivor 2 Record Breaker.
 
-Following can be modified:
+## Things it can modify
+
 - Macca
+
+## Supported Browsers
+
+Aside from browsers below nothing else is tested:
+- Firefox
+- Chrome
