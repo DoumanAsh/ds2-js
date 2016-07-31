@@ -67,10 +67,10 @@ function Save(name, buffer) {
     };
 
     /**
-     * Writes value into save's view.
+     * Writes value into save's view as LE.
      *
      * @param offset From where to start reading.
-     * @param num Number of bytes to extract.
+     * @param num Number of bytes to write.
      */
 
     this.set_int = function(offset, value, num) {
@@ -147,6 +147,12 @@ function is_ds2_save(buffer) {
     return true;
 }
 
+/**
+ * File upload event handler.
+ *
+ * It checks file to be in correct format.
+ * Initializes UI if file is ok.
+ */
 function ds2SaveLoad(event) {
     var files = selectEventFiles(event);
 
@@ -182,6 +188,11 @@ var show_warning = function() {
     };
 };
 
+/**
+ * Trigger save to disk.
+ *
+ * Alerts if no save is uploaded.
+ */
 function ds2SaveNew() {
     if (save) {
         save.to_disk();
@@ -191,6 +202,11 @@ function ds2SaveNew() {
     }
 }
 
+/**
+ * On change event handler to input with max 4 bytes size.
+ *
+ * It verifies that input value is valid number with size at most 4 bytes.
+ */
 function input4bytes(ev) {
     if (!save) {
         return;
