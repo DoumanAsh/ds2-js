@@ -31,10 +31,9 @@ function Save(name, buffer) {
      * @note File will be saved as binary one.
      */
     this.to_disk = function() {
-        var file = new File([new Uint8Array(this.buffer)],
-                            this.name,
+        var file = new Blob([new Uint8Array(this.buffer)],
                             {type: "data:application/octet-stream;base64,"});
-        saveAs(file);
+        saveAs(file, this.name);
     };
 
     /**
