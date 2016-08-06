@@ -29,16 +29,16 @@ div.ds2_main
     h2(class="title")="Party"
     ul(class="party_tab")
         li
-            a(href="#", onclick="open_tab('1')")="Member 1"
+            a(href="#", class="active", onclick="open_tab(event, '1')")="Member 1"
         li
-            a(href="#", onclick="open_tab('2')")="Member 2"
+            a(href="#", onclick="open_tab(event, '2')")="Member 2"
         li
-            a(href="#", onclick="open_tab('3')")="Member 3"
+            a(href="#", onclick="open_tab(event, '3')")="Member 3"
         li
-            a(href="#", onclick="open_tab('4')")="Member 4"
+            a(href="#", onclick="open_tab(event, '4')")="Member 4"
 
     script.
-        function open_tab(idx_to_show) {
+        function open_tab(ev, idx_to_show) {
             var form = document.getElementById('member_'+idx_to_show);
 
             if (!form.className.includes('hidden')) {
@@ -53,6 +53,12 @@ div.ds2_main
                 }
             }
 
+            var tab = ev.target.parentElement.parentElement;
+            for (var idx = 0; idx < 4; idx++) {
+                tab.children[idx].children[0].className = tab.children[idx].children[0].className.replace(/ *active/, "");
+            }
+
+            ev.target.className += ' active';
             form.className = form.className.replace(' hidden', '');
         }
 
