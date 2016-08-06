@@ -17,13 +17,66 @@ function Save(name, buffer) {
     this.buffer = buffer;
     this.view = new DataView(this.buffer);
 
+    /* NOTE: Check member order in layot. */
     this.ui = {
         'macca': {
             dom: document.getElementById('macca_input'),
             offset: 0x6C4,
+            on_change: input4bytes,
             len: 4
         }
     };
+
+    for (var idx = 0; idx < 4; idx++) {
+        this.ui[idx+1+"_exp"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[0].children[1],
+            offset: 0x7C + idx*0x24,
+            on_change: party_exp,
+            len: 2
+        };
+        this.ui[idx+1+"_hp"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[1].children[1],
+            offset: 0x82 + idx*0x24,
+            on_change: party_hp,
+            len: 2
+        };
+        this.ui[idx+1+"_mp"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[2].children[1],
+            offset: 0x84 + idx*0x24,
+            on_change: party_hp,
+            len: 2
+        };
+        this.ui[idx+1+"_str"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[3].children[1],
+            offset: 0x7E + idx*0x24,
+            on_change: party_stat,
+            len: 1
+        };
+        this.ui[idx+1+"_mag"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[4].children[1],
+            offset: 0x7F + idx*0x24,
+            on_change: party_stat,
+            len: 1
+        };
+        this.ui[idx+1+"_vit"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[5].children[1],
+            offset: 0x80 + idx*0x24,
+            on_change: party_stat,
+            len: 1
+        };
+        this.ui[idx+1+"_agi"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[6].children[1],
+            offset: 0x81 + idx*0x24,
+            on_change: party_stat,
+            len: 1
+        };
+        this.ui[idx+1+"_move"] = {
+            dom: document.getElementById('member_'+(idx+1)).children[7].children[1],
+            offset: 0x9F + idx*0x24,
+            on_change: party_stat,
+            len: 1
+        };
+    }
 
     /**
      * Prompt user to download save.
@@ -44,6 +97,8 @@ function Save(name, buffer) {
             if (this.ui.hasOwnProperty(key)) {
                 this.ui[key].dom.value = this.get_int(this.ui[key].offset, this.ui[key].len);
                 this.ui[key].dom.disabled = false;
+                this.ui[key].dom.oninput = this.ui[key].on_change;
+                this.ui[key].onpropertychange = this.ui[key].onpropertychange; // for IE8
             }
             else {
                 console.log("Error: unknown ui key=" + key);
@@ -202,6 +257,43 @@ function ds2SaveNew() {
 }
 
 /**
+ * @return On change event handler for party input.
+ *
+ * @param max_val Max possible integer input.
+ */
+function party_input_create(max_val) {
+    return function(ev) {
+        if (!save) {
+            return;
+        }
+
+        var invalid = function(target) {
+            if (!target.className.includes("invalid")) {
+                target.className += "invalid";
+                target.title = "Allowed values: [0; " + max_val + "]";
+            }
+        };
+
+        var valid = function(target) {
+            target.className = target.className.replace("invalid", "");
+            target.title = "";
+        };
+
+        var value = parseInt(ev.target.value);
+        if (value < 0 || value > max_val) {
+            invalid(ev.target);
+            return;
+        }
+
+        valid(ev.target);
+        var parent_idx = ev.target.parentElement.parentElement.id.substr(-1);
+        var name = parent_idx + '_' + ev.target.id;
+
+        save.set_ui_val(name, value);
+    };
+}
+
+/**
  * On change event handler to input with max 4 bytes size.
  *
  * It verifies that input value is valid number with size at most 4 bytes.
@@ -240,8 +332,11 @@ function input4bytes(ev) {
     save.set_ui_val(name, value);
 }
 
+var party_stat = party_input_create(0x28);
+var party_hp = party_input_create(0x3E7);
+var party_exp = party_input_create(0xFFFF);
+
 if (typeof module !== "undefined" && module.exports) {
     module.exports.saveLoad = ds2SaveLoad;
     module.exports.saveNew = ds2SaveNew;
-    module.exports.input4bytes = input4bytes;
 }

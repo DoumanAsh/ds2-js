@@ -7,6 +7,11 @@ This is a online save editor for Devil Survivor 2 Record Breaker.
 ## Things it can modify
 
 - Macca
+- Party modification:
+    - EXP
+    - HP/MP
+    - Stats
+    - Move
 
 ## Supported Browsers
 

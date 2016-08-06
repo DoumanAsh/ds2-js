@@ -34,6 +34,9 @@ h1.title
 
 h2.title
     font-size: 1.5rem
+    padding-top: 1rem
+    padding-bottom: 1rem
+    letter-spacing: 2px
 
 p
     word-wrap: break-word
@@ -49,6 +52,8 @@ div.ds2_main
     box-shadow: 2px 2px 2px 2px #aaa
     background-color: #eaeaea
 
+    & > h2.title
+        margin-left: 1rem
     & > div.heading
         padding: .5em
         text-align: center
@@ -90,12 +95,19 @@ div.ds2_main
         text-align: center
         display: table
         padding: 1rem
+        & > div
+            display: inline-block
+            margin-top: 1em
+            margin-right: 1em
+            width: 30%
         & > label
+        & > div > label
             display: block
             color: #5a5454
             padding: 10px
             font-size: 1.2rem
         & > input
+        & > div input
             border: 0
             padding: 10px
             border: 1px solid #DDDDDD
@@ -104,4 +116,28 @@ div.ds2_main
                 box-shadow: 0 0 5px rgba(81, 203, 238, 1);
             &.invalid
                 background-color: #ff0d0d
+    & > form.party_member
+        animation: fade-in 1s
+    & > form.hidden
+        display: none
 
+
+    & > ul.party_tab
+        list-style-type: none
+        overflow: hidden
+        border: 1px solid #ccc
+        background-color: #f1f1f1
+        & > li
+            display: inline-block
+            & > a
+                color: black
+                text-align: center
+                padding: 14px 16px
+                text-decoration: none
+                transition: 0.3s
+                font-size: 17px
+                &:hover
+                    background-color: #ddd
+                &:active
+                &:focus
+                    background-color: #ccc
