@@ -5,6 +5,21 @@ save_input.addEventListener('change', ds2.saveLoad, false);
 //Add drag-and-drop
 document.addEventListener('dragover', common.handleDragOver, false);
 document.addEventListener('drop', ds2.saveLoad, false);
-</script></div><form id="macca" action="" onsubmit="return false" class="text_box"><label for="macca_input">Macca</label><input id="macca_input" disabled><script>var macca_input = document.getElementById('macca_input')
-macca_input.oninput = ds2.input4bytes;
-macca_input.onpropertychange = macca_input.oninput; // for IE8</script></form></div>
+</script></div><form id="macca" action="" onsubmit="return false" class="text_box"><label for="macca_input">Macca</label><input id="macca_input" disabled></form><h2 class="title">Party</h2><ul class="party_tab"><li><a href="#" onclick="open_tab('1')">Member 1</a></li><li><a href="#" onclick="open_tab('2')">Member 2</a></li><li><a href="#" onclick="open_tab('3')">Member 3</a></li><li><a href="#" onclick="open_tab('4')">Member 4</a></li></ul><script>function open_tab(idx_to_show) {
+    var form = document.getElementById('member_'+idx_to_show);
+
+    if (!form.className.includes('hidden')) {
+        return;
+    }
+
+    for (var idx = 1; idx < 5; idx++) {
+        var iter_form = document.getElementById('member_'+idx);
+        if (!iter_form.className.includes('hidden')) {
+            iter_form.className += ' hidden';
+            break;
+        }
+    }
+
+    form.className = form.className.replace(' hidden', '');
+}
+</script><form id="member_1" class="text_box party_member"><div><label for="exp">EXP</label><input id="exp" disabled></div><div><label for="hp">HP</label><input id="hp" disabled></div><div><label for="mp">MP</label><input id="mp" disabled></div><div><label for="str">STR</label><input id="str" disabled></div><div><label for="mag">MAG</label><input id="mag" disabled></div><div><label for="vit">VIT</label><input id="vit" disabled></div><div><label for="agi">AGI</label><input id="agi" disabled></div><div><label for="move">MOVE</label><input id="move" disabled></div></form><form id="member_2" class="text_box party_member hidden"><div><label for="exp">EXP</label><input id="exp" disabled></div><div><label for="hp">HP</label><input id="hp" disabled></div><div><label for="mp">MP</label><input id="mp" disabled></div><div><label for="str">STR</label><input id="str" disabled></div><div><label for="mag">MAG</label><input id="mag" disabled></div><div><label for="vit">VIT</label><input id="vit" disabled></div><div><label for="agi">AGI</label><input id="agi" disabled></div><div><label for="move">MOVE</label><input id="move" disabled></div></form><form id="member_3" class="text_box party_member hidden"><div><label for="exp">EXP</label><input id="exp" disabled></div><div><label for="hp">HP</label><input id="hp" disabled></div><div><label for="mp">MP</label><input id="mp" disabled></div><div><label for="str">STR</label><input id="str" disabled></div><div><label for="mag">MAG</label><input id="mag" disabled></div><div><label for="vit">VIT</label><input id="vit" disabled></div><div><label for="agi">AGI</label><input id="agi" disabled></div><div><label for="move">MOVE</label><input id="move" disabled></div></form><form id="member_4" class="text_box party_member hidden"><div><label for="exp">EXP</label><input id="exp" disabled></div><div><label for="hp">HP</label><input id="hp" disabled></div><div><label for="mp">MP</label><input id="mp" disabled></div><div><label for="str">STR</label><input id="str" disabled></div><div><label for="mag">MAG</label><input id="mag" disabled></div><div><label for="vit">VIT</label><input id="vit" disabled></div><div><label for="agi">AGI</label><input id="agi" disabled></div><div><label for="move">MOVE</label><input id="move" disabled></div></form></div>
