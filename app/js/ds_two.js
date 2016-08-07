@@ -98,7 +98,7 @@ function Save(name, buffer) {
                 this.ui[key].dom.value = this.get_int(this.ui[key].offset, this.ui[key].len);
                 this.ui[key].dom.disabled = false;
                 this.ui[key].dom.oninput = this.ui[key].on_change;
-                this.ui[key].onpropertychange = this.ui[key].onpropertychange; // for IE8
+                this.ui[key].dom.onpropertychange = this.ui[key].on_change; // for IE8
             }
             else {
                 console.log("Error: unknown ui key=" + key);

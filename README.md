@@ -18,3 +18,4 @@ This is a online save editor for Devil Survivor 2 Record Breaker.
 Aside from browsers below nothing else is tested:
 - Firefox
 - Chrome
+- Edge
