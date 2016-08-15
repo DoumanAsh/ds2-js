@@ -5,8 +5,6 @@ SHA=`git log -1 --format="%s(%h %cd)" --date=short`
 
 git clone $REPO out/
 
-ls
-
 cd out/
 
 git checkout gh-pages
@@ -15,7 +13,7 @@ rm -rf *
 cp -rf ../public/* .
 
 git status
-if [[ -z `git status --porcelain` ]]; then
+if [ -z `git status --porcelain` ]; then
     echo "No changes to the site"
     return 0
 fi
