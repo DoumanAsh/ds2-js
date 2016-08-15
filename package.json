@@ -9,8 +9,7 @@
     "url": "https://github.com/DoumanAsh/aru-js"
   },
   "scripts": {
-    "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "start": "brunch watch --server"
   },
   "dependencies": {
     "babel-brunch": "^6.0.4",
