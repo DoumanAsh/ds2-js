@@ -3,10 +3,10 @@ node_js:
   - node
 
 before_script:
-  - npm install -g brunch
   - npm install
 
 script:
-  - brunch build --production
+  - npm run test
+  - npm run build
 
-after_script: sh ./ci/update_page.sh
+after_success: bash -x ./ci/update_page.sh

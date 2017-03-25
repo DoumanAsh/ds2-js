@@ -1,35 +1,39 @@
 module.exports = {
     files: {
         javascripts: {
-            joinTo: 'js/app.js'
+            joinTo: 'app.js'
         },
         stylesheets: {
             joinTo: 'style.css'
-        },
-        templates: {
-            joinTo: {
-                'app/jade.js': /.+\.jade$/
-            },
         }
     },
+    conventions: {
+        ignored: [
+            '_*.*',
+            'test/**/*.js'
+        ],
+        assets: [
+            /^app\/assets/,
+            'app/templates/',
+            'app/templates/[a-zA-Z0-9]*.jade',
+        ],
+    },
     plugins: {
-        jaded: {
-            staticPatterns: /^app(\/|\\)static_jade(\/|\\)(.+)\.jade$/
+        babel: {
+            presets: ['es2015'],
+            plugins: ["inferno"]
         },
         stylus: {
             includeCss: true,
             plugins: ['autoprefixer-stylus']
         },
-        uglify: {
-            mangle: true
-        },
-        jshint: {
-            pattern: /^app(\/|\\)js(\/|\\)[^\/\\]*\.js$/,
+        eslint: {
+            pattern: /^app\/.*\.js(x)*$/,
             warnOnly: true
         },
-    },
-    npm: {
-        compilers: ['babel-brunch']
-    },
-    sourceMaps: 'absoluteUrl'
+        jade: {
+            staticBasedir: 'app/templates',
+            noRuntime: true
+        }
+    }
 }

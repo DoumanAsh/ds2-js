@@ -1,0 +1,64 @@
+div.app
+    & > * nav
+    & > nav
+        display: flex
+        background: #00297b
+        box-shadow: 3px 3px 3px 4px rgba(0,0,0,.4)
+        color: white
+
+        & > a
+            padding: .6em
+
+            &:hover
+                background: #00195b
+                cursor: pointer
+
+    & > content
+        display: flex
+        & > * nav.save
+        & > nav.save
+            flex-direction: column
+            transition: width .2s
+            width: 125px
+
+            &:hover
+                width: 150px
+
+            & > a
+                font-size: 1.5em
+                display: block
+                width: 100%
+
+                &.selected
+                    background: #105486
+
+        & > div.Party
+            flex: 1 0
+            display: flex
+
+        & > div > section.inputs
+        & > section.inputs
+            animation: fade-in 1s
+            padding: 1em
+            flex: 1 0
+
+            display: flex
+            justify-content: space-around
+            flex-wrap: wrap
+            & > section
+                flex: 1 0 25%
+                text-align: center
+                & > *
+                    display: block
+                & > label
+                    color: #5a5454
+                    padding: .2em
+                    font-size: 1.2em
+                & > input
+                    border: 1px solid #ccc
+                    padding: .4em
+                    border-radius: 2px
+                    margin: 0 auto
+
+                    &:invalid
+                        background-color: #ffdddd

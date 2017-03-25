@@ -1,143 +1,41 @@
 *
+    font-size: 20px
     margin: 0
-    padding: 0
+    box-sizing: border-box
 
-img_url(name)
-    url(images/name)
+body
+    background: #eaeaea
 
-animation(args...)
-   animation args
 
 @keyframes fade-in
     from
-        opacity: 0;
-        opacity: 1\9; /* IE9 only */
+        opacity: 0
     to
-        opacity:1;
+        opacity: 1
 
-body
-    font: 16px Helvetica, Georgia, sans-serif
-    font-family: Georgia, Serif
-    line-height: 24px
+@keyframes fly-in
+    0%
+        opacity: 0;
+        transform: translateY(-40px);
 
-img.pic
-    border-radius: 6px
+    100%
+        opacity: 1;
+        transform: translateY(0);
 
-h1.title
-    font-size: 3rem
-    padding-top: 1rem
-    padding-bottom: 1rem
-    border-bottom: 1px solid #999
-    display: inline-block
-    letter-spacing: -2px
-    margin-bottom: 16px
+h1.big
+    font-weight: 100
+    font-size: 6rem
 
-h2.title
-    font-size: 1.5rem
-    padding-top: 1rem
-    padding-bottom: 1rem
-    letter-spacing: 2px
+.container
+    margin: 1rem
 
-p
-    word-wrap: break-word
+.center
+    text-align: center
 
-div.ds2_main
-    display: flex
-    flex-flow: column
-    width: 50%
-    position: fixed
-    top: 5%
-    left: 25%
-    bottom: 5%
-    box-shadow: 2px 2px 2px 2px #aaa
-    background-color: #eaeaea
-
-    & > h2.title
-        margin-left: 1rem
-    & > div.heading
-        padding: .5em
-        text-align: center
-        color: white
-        background-color: #696969
-
-    & > div.save_up
-        overflow: hidden
-        margin: 10px
-        display: flex
-        justify-content: space-around
-        & > span.warning
-            color: #ff2d00
-            font-size: 1.5em
-            visibility: hidden
-            &.show
-                visibility: inherit
-
-        & > button.upload
-        & > button.save
-            border-radius: 4px
-            color: #ffffff
-            border: none
-            font-size: 20px
-            background: #757575
-            padding: 10px 20px 10px 20px
-            text-decoration: none
-            &:hover
-            &:active
-                background: #080808
-                text-decoration: none
-        & > button.upload
-            & input[type="file"]
-                display: none
-
-
-    & > form.text_box
+.inline_children
+    & > *
+        display:inline-block
         vertical-align: middle
-        text-align: center
-        display: table
-        padding: 1rem
-        & > div
-            display: inline-block
-            margin-top: 1em
-            margin-right: 1em
-            width: 30%
-        & > label
-        & > div > label
-            display: block
-            color: #5a5454
-            padding: 10px
-            font-size: 1.2rem
-        & > input
-        & > div input
-            border: 0
-            padding: 10px
-            border: 1px solid #DDDDDD
-            &:focus
-                outline: none
-                box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-            &.invalid
-                background-color: #ff0d0d
-    & > form.party_member
-        animation: fade-in 1s
-    & > form.hidden
-        display: none
 
-
-    & > ul.party_tab
-        list-style-type: none
-        overflow: hidden
-        border: 1px solid #ccc
-        background-color: #f1f1f1
-        & > li
-            display: inline-block
-            & > a
-                color: black
-                text-align: center
-                padding: 14px 16px
-                text-decoration: none
-                transition: 0.3s
-                font-size: 17px
-                &:hover
-                    background-color: #ddd
-                &.active
-                &:focus
-                    background-color: #ccc
+.hidden
+    display: none

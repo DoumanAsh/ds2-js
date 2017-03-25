@@ -9,20 +9,41 @@
     "url": "https://github.com/DoumanAsh/ds2-js"
   },
   "scripts": {
-    "start": "brunch watch --server"
+    "lint": "eslint --ext .jsx --ext .js app/ test/",
+    "start": "brunch watch --server",
+    "build": "brunch build --production",
+    "test": "node --harmony ./node_modules/ava/cli.js --verbose"
   },
   "dependencies": {
-    "babel-brunch": "^6.0.4",
-    "jaded-brunch": "^2.3.0",
-    "jshint-brunch": "^2.0.0",
-    "stylus-brunch": "^2.6.0"
+    "file-saver": "^1.3.3",
+    "inferno": "*",
+    "inferno-component": "*"
   },
   "devDependencies": {
-    "auto-reload-brunch": "^2.0.0",
-    "autoprefixer-stylus": "^0.9.3",
-    "clean-css-brunch": "^2.0.0",
-    "css-brunch": "^2.0.0",
-    "javascript-brunch": "^2.0.0",
-    "uglify-js-brunch": "^2.0.0"
+    "eslint": "^3.14.1",
+    "ava": "*",
+    "eslint-plugin-inferno": "*",
+    "babel-plugin-inferno": "*",
+    "babel-preset-es2015": "*",
+    "brunch": "*",
+    "autoprefixer-stylus": "*",
+    "babel-brunch": "*",
+    "clean-css-brunch": "*",
+    "css-brunch": "*",
+    "eslint-brunch": "*",
+    "jade-brunch": "*",
+    "rollup-brunch": "*",
+    "stylus-brunch": "*",
+    "auto-reload-brunch": "*",
+    "uglify-js-brunch": "*"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "source": [
+      "app/**/*.js"
+    ],
+    "failFast": true
   }
 }

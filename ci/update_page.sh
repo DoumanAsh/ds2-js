@@ -1,22 +1,24 @@
 #!/bin/bash
-
 REPO=`git config remote.origin.url`
 SHA=`git log -1 --format="%s(%h %cd)" --date=short`
+COMMIT_AUTHOR_EMAIL=`git --no-pager log -1 --pretty=format:"%ae" HEAD`
 
 git clone $REPO out/
 
 cd out/
 
-git checkout gh-pages
+git checkout gh-pages || git checkout --orphan gh-pages
+
+ls
+
 rm -rf *
 
 cp -rf ../public/* .
 
+find . -name "_*.*" | xargs rm -rf
+find . -name ".*.*" | xargs rm -rf
+
 git status
-if [ -z `git status --porcelain` ]; then
-    echo "No changes to the site"
-    return 0
-fi
 
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
