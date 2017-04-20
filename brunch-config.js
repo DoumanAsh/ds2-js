@@ -9,7 +9,7 @@ module.exports = {
     },
     conventions: {
         ignored: [
-            '_*.*',
+            /_.*\..*$/,
             'test/**/*.js'
         ],
         assets: [
